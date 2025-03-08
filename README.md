@@ -120,8 +120,8 @@ After running SQL queries in Athena, I **cross-verified key metrics using Excel*
 
 ---
 
-## **6️⃣ Data Visualization in AWS QuickSight**  
-To showcase key insights, I designed a **fully interactive AWS QuickSight dashboard** covering:  
+## **6️⃣ Data Visualization**  
+To showcase key insights, I designed a **fully interactive dashboard** covering:  
 
 ✅ **Yearly Sales & Profit Trends**  
 ✅ **Top-Selling Categories & Customer Segments**  
@@ -131,6 +131,8 @@ To showcase key insights, I designed a **fully interactive AWS QuickSight dashbo
 <p align="center">
   <img src="Visualization.png" alt="Superstore Metrics Dashboard" width="700">
 </p>
+
+## tableau
 
 📌 **Why AWS QuickSight?**  
 ✔ Native AWS integration with **Athena & Glue**  

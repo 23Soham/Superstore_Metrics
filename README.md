@@ -4,31 +4,31 @@
 🚀 Transforming raw data into powerful business insights using AWS Glue, S3, Athena & QuickSight
 
 📌 Project Overview
-This project is an end-to-end data pipeline built using AWS services to process, analyze, and visualize Superstore sales data efficiently. The goal was to:
-✅ Ingest structured data into AWS S3 with partitioning for optimized queries.
-✅ Use AWS Glue Crawlers to automate schema discovery and create a metadata catalog.
-✅ Run SQL queries using AWS Athena on partitioned data for efficient analysis.
-✅ Generate a comprehensive EDA report using ydata-profiling for quick insights.
-✅ Build an interactive dashboard in AWS QuickSight to visualize key business metrics.
-✅ Cross-verify results in Microsoft Excel to ensure data accuracy and integrity.
+This project is an end-to-end data pipeline that processes and analyzes Superstore sales data using AWS services. The pipeline ensures automated data ingestion, transformation, querying, and visualization to extract key business insights.
 
-By combining these tools, I built a fully automated ETL pipeline that transforms raw data into meaningful insights while maintaining scalability and performance.
+✅ Stored structured data in AWS S3 with partitioning for optimized queries.
+✅ Used AWS Glue Crawlers to automate schema discovery and metadata management.
+✅ Queried partitioned data using AWS Athena for performance-efficient analysis.
+✅ Performed exploratory data analysis (EDA) with ydata-profiling to detect missing values & patterns.
+✅ Built an AWS QuickSight dashboard to visualize key metrics like sales trends, profit distribution, and top customers.
+✅ Cross-verified calculations using Microsoft Excel to ensure accuracy and validation.
 
 ⚙️ Tech Stack Used
-AWS S3 – Cloud storage for raw data
-AWS Glue – ETL & schema discovery via Crawlers
-AWS Athena – Querying structured data from S3
-AWS QuickSight – Business intelligence & dashboarding
-ydata-profiling – Automated EDA & statistical summaries
-Microsoft Excel – Data validation & cross-checking
+🛢️ AWS S3 – Cloud storage for structured data
+🔄 AWS Glue – ETL processing & schema discovery
+🔍 AWS Athena – Querying partitioned data
+📊 AWS QuickSight – Business intelligence & dashboarding
+📈 ydata-profiling – Automated EDA reports
+📑 Microsoft Excel – Data validation & cross-checking
 📂 Project Workflow
-Let’s break down the entire AWS Data Pipeline step by step.
+This pipeline automates the transformation of raw data into business insights through a well-defined sequence of steps.
 
 1️⃣ Data Ingestion: Storing Raw Data in S3
-🔹 The raw Superstore dataset was sourced from Kaggle.
-🔹 Filtered data for only the years 2014-2017 to maintain relevance.
-🔹 Created an AWS S3 Bucket (shahdb) to store the dataset.
-🔹 Within the bucket, structured the data as:
+The Superstore dataset was sourced from Kaggle and filtered to include data from 2014 to 2017.
+
+🔹 Created an AWS S3 Bucket (shahdb) to store the structured dataset.
+🔹 Partitioned data by snapshot_year for optimized querying in Athena.
+🔹 The folder structure follows:
 
 ruby
 Copy
@@ -37,38 +37,43 @@ S3://shahdb/orders/snapshot_year=2014/2014_data.csv
 S3://shahdb/orders/snapshot_year=2015/2015_data.csv
 S3://shahdb/orders/snapshot_year=2016/2016_data.csv
 S3://shahdb/orders/snapshot_year=2017/2017_data.csv
-🔹 Partitioning by year ensures optimized querying in Athena.
+🔹 Why Partitioning?
 
+Reduces query scan time by only scanning relevant partitions.
+Saves AWS Athena querying costs.
+Improves data retrieval speed.
 2️⃣ Schema Discovery & Cataloging with AWS Glue
-🔹 Created an AWS Glue Database (db_store) to organize metadata.
-🔹 Set up a Glue Crawler (orders_project) to scan the S3 data and create a table schema.
-🔹 The crawler automatically identified column names, data types, and partitions.
-🔹 This step eliminated the need for manual schema creation and ensured automated updates whenever new data was added.
+To manage and structure the data, I leveraged AWS Glue Crawlers, which automatically detect schema changes and update metadata in the AWS Glue Data Catalog.
 
-📌 Why AWS Glue?
-✔ Automates schema extraction & updates
-✔ Stores metadata in the AWS Glue Data Catalog
-✔ Makes S3 data easily queryable with Athena
+🔹 Created an AWS Glue Database (db_store) to store metadata.
+🔹 Configured a Glue Crawler (orders_project) to scan S3 and detect:
+✅ Column names & data types
+✅ Partition keys (snapshot_year)
+✅ Automatic updates when new data is added
+
+📌 Why AWS Glue Crawlers?
+✔ Eliminates manual schema creation
+✔ Automatically detects new data partitions
+✔ Stores structured metadata in the AWS Glue Data Catalog
 
 3️⃣ Data Profiling & Exploratory Data Analysis (EDA)
-🔹 Used ydata-profiling to generate an in-depth EDA report before querying the data.
-🔹 Key insights gained:
-✅ Missing values & potential outliers
-✅ Correlation between numerical & categorical variables
-✅ Distribution of key attributes like sales & profit
-🔹 This step helped in understanding data integrity and optimizing future queries.
+Before querying, I used ydata-profiling to automatically generate EDA reports and understand the dataset better.
+
+🔹 Key Insights Identified:
+✅ Missing values in certain attributes
+✅ Correlation between sales, profit, and discount
+✅ Outlier detection for high-profit transactions
+✅ Category-wise sales contribution
 
 📌 Why ydata-profiling?
-✔ Saves hours of manual EDA work
-✔ Provides visual insights on missing values, correlations & distributions
-✔ Helps in data cleaning & transformation decisions
+✔ Saves hours of manual EDA
+✔ Generates statistical reports & visualizations
+✔ Helps in feature selection & anomaly detection
 
 4️⃣ Querying Data with AWS Athena
-🔹 Connected AWS Athena to the AWS Glue Data Catalog for seamless querying.
-🔹 Ran SQL queries to extract sales trends, customer segmentation, and profit analysis.
-🔹 Optimized query performance using partitioning (snapshot_year).
+With structured metadata in the AWS Glue Data Catalog, I used AWS Athena to query partitioned data efficiently.
 
-Example Athena Query:
+🔹 Example Athena Query:
 
 sql
 Copy
@@ -77,39 +82,44 @@ SELECT snapshot_year, SUM(sales) AS total_sales, SUM(profit) AS total_profit
 FROM db_store.orders
 GROUP BY snapshot_year
 ORDER BY snapshot_year;
+🔹 Optimized query performance by using partition pruning (snapshot_year).
+
 📌 Why AWS Athena?
-✔ Serverless SQL querying
-✔ No need to manage databases
-✔ Cost-effective (pay-per-query model)
+✔ Serverless SQL querying with no infrastructure to manage
 ✔ Works seamlessly with AWS Glue & S3
+✔ Cost-effective (pay-per-query pricing)
 
 5️⃣ Data Validation using Microsoft Excel
-🔹 After running queries in Athena, I cross-verified the results using Excel.
-🔹 Used Pivot Tables & SUM functions to manually check sales & profit figures.
-🔹 Ensured there were no discrepancies in data aggregation.
+After running SQL queries in Athena, I cross-verified key metrics using Excel.
+
+🔹 Used Pivot Tables to check:
+✅ Sales and Profit calculations
+✅ Customer segmentation accuracy
+✅ Category-wise product contribution
+🔹 Ensured no discrepancies before visualizing the data in QuickSight.
 
 📌 Why Excel?
 ✔ Quick validation of query outputs
-✔ Great for checking aggregates & trends
-✔ Helps in debugging unexpected results
+✔ Helps catch unexpected inconsistencies
+✔ Useful for final checks before visualization
 
 6️⃣ Data Visualization in AWS QuickSight
-🔹 Built an interactive dashboard to showcase:
-✅ Yearly sales & profit trends
-✅ Top-selling product categories
-✅ Region-wise performance
-✅ Customer segmentation insights
-🔹 Used AWS QuickSight's BI tools to create compelling visualizations.
+To showcase key insights, I designed a fully interactive AWS QuickSight dashboard covering:
 
+✅ Yearly Sales & Profit Trends
+✅ Top-Selling Categories & Customer Segments
+✅ Geographical Profit & Sales Analysis
+✅ Best Performing Ship Modes
+
+<p align="center"> <img src="Superstore_Dashboard.png" alt="Superstore Metrics Dashboard" width="700"> </p>
 📌 Why AWS QuickSight?
-✔ Directly connects to Athena & S3
-✔ Fast, interactive & scalable
-✔ Great for business users & stakeholders
+✔ Native AWS integration with Athena & Glue
+✔ Interactive & scalable for big data visualization
+✔ Ideal for business intelligence & stakeholder reporting
 
 🎯 Final Thoughts & Key Learnings
-🔹 Partitioning drastically improves query performance in Athena.
-🔹 AWS Glue Crawlers automate schema discovery, saving time on manual metadata management.
-🔹 ydata-profiling is a hidden gem that simplifies EDA and feature selection.
-🔹 Excel remains a powerful yet underrated tool for cross-verifying query results.
-🔹 Building an ETL pipeline in AWS is scalable, cost-effective, and highly automated!
-
+🔹 Partitioning improves query performance and reduces Athena costs.
+🔹 AWS Glue Crawlers automate schema updates, making ETL seamless.
+🔹 ydata-profiling accelerates EDA, simplifying feature selection.
+🔹 Excel remains an underappreciated tool for data validation.
+🔹 Building a serverless AWS data pipeline is scalable, cost-effective, and efficient!

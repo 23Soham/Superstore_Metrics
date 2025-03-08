@@ -1,6 +1,6 @@
 
 
-# 🏪 **Superstore Metrics – AWS Data Pipeline**  
+# 🏪 **Superstore Metrics**  
 🚀 **Transforming raw data into actionable business insights using AWS Glue, S3, Athena & QuickSight**  
 
 <p align="center">

@@ -4,7 +4,7 @@
 🚀 **Transforming raw data into actionable business insights using AWS Glue, S3, Athena & QuickSight**  
 
 <p align="center">
-  <img src="Superstore_Workflow.drawio.png" alt="Superstore Data Pipeline Workflow" width="700">
+  <img src="/Users/sohamshah/Desktop/Screenshot 2025-03-07 at 8.14.17 PM.png" alt="Superstore Data Pipeline Workflow" width="700">
 </p>
 
 ---

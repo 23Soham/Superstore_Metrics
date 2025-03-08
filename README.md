@@ -129,7 +129,7 @@ To showcase key insights, I designed a **fully interactive AWS QuickSight dashbo
 ✅ **Best Performing Ship Modes**  
 
 <p align="center">
-  <img src="Superstore_Dashboard.png" alt="Superstore Metrics Dashboard" width="700">
+  <img src="Visualization.png" alt="Superstore Metrics Dashboard" width="700">
 </p>
 
 📌 **Why AWS QuickSight?**  

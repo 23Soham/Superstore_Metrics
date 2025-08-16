@@ -1,11 +1,8 @@
-
-
 # 🏪 **Superstore Metrics**  
-🚀 **Transforming raw data into actionable business insights using AWS Glue, S3, Athena & QuickSight**  
 
-<p align="center">
-  <img src="Pipeline.jpg" alt="Superstore Data Pipeline Workflow" width="700">
-</p>
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/b9c7c8a3-a2ef-48cf-b2f9-ad29b05a0e20" />
+
+🚀 **Transforming raw data into actionable business insights using AWS Glue, S3, Athena & QuickSight**  
 
 ---
 
@@ -33,6 +30,10 @@ This project is an **end-to-end data pipeline** that processes and analyzes **Su
 
 ## **📂 Project Workflow**
 This pipeline **automates the transformation of raw data into business insights** through a well-defined sequence of steps.
+
+<p align="center">
+  <img src="Pipeline.jpg" alt="Superstore Data Pipeline Workflow" width="700">
+</p>
 
 ### **1️⃣ Data Ingestion: Storing Raw Data in S3**  
 The **Superstore dataset** was sourced from **[Kaggle](https://www.kaggle.com/datasets/vivek468/superstore-dataset-final)** and filtered to include data from **2014 to 2017**.  

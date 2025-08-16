@@ -151,9 +151,6 @@ To showcase key insights, I designed a **fully interactive dashboard** covering:
 
 ---
 
-## **📌 Want to Explore the Full Project?**  
-🔗 **Check out the complete GitHub repository:**  
-👉 [Superstore Metrics GitHub Repository](https://github.com/23Soham/Superstore_Metrics)  
 
 👀 **Let’s connect!** How do you optimize **ETL pipelines, data profiling, and cloud analytics?** Would love to hear your thoughts! 🚀  
 
